@@ -1,0 +1,162 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../templates/common.xhtml">
+        <ui:define name="body">
+            <p:growl id="growl" showDetail="true"/>
+
+            <h:form id="forma">
+                <p:messages autoUpdate="true" />
+                
+                <h:outputLabel value="Registrar Cliente" />
+                <div class="separador"></div>
+                <p:panelGrid  style="width: 100%;">
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Nombres" />
+                            </h:panelGroup>                            
+                        </p:column>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Apellidos" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row>  
+                    <p:row> 
+                        <p:column>
+                            <h:panelGroup>
+                            <p:inputText value="#{clienteBean.cliente.nombres}" />
+
+                            </h:panelGroup>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.apellidos}" />
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Edad" />
+                            </h:panelGroup>                            
+                        </p:column>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Sexo" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row> 
+
+                    <p:row> 
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.edad}"/>
+                        </p:column>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.sexo}" />
+                        </p:column>
+                    </p:row> 
+
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Tipo de Identificación" />
+                            </h:panelGroup>  
+                        </p:column>
+
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Identificación" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.tipoIdentificacion}"/>
+                        </p:column>
+                        <p:column>
+                            <p:password value="#{clienteBean.cliente.identificacion}"/>
+                        </p:column>
+
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Departamento" />
+                            </h:panelGroup>  
+                        </p:column>
+
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Ciudad" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.departamento}"/>
+                        </p:column>
+                        <p:column>
+                            <p:password value="#{clienteBean.cliente.ciudad}"/>
+                        </p:column>
+
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Barrio" />
+                            </h:panelGroup>  
+                        </p:column>
+
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Dirección" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.barrio}"/>
+                        </p:column>
+                        <p:column>
+                            <p:password value="#{clienteBean.cliente.direccion}"/>
+                        </p:column>
+
+                    </p:row>
+                    
+                    <p:row>
+                        <p:column>
+                            <h:panelGroup>
+                                <h:outputLabel value="Tipo de Servicio" />
+                            </h:panelGroup>  
+                        </p:column>
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:inputText value="#{clienteBean.cliente.tipoServicio}"/>
+                        </p:column>
+
+                    </p:row>
+
+                    <p:row>
+                        <p:column>
+                            <p:commandButton styleClass="btn" 
+                                             id="btn-crear-cuenta"
+                                             value="Registrarse"  update="@form"
+                                             action="#{clienteBean.crearCliente()}"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

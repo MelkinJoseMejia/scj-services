@@ -1,0 +1,74 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <ui:composition>
+
+
+        <ui:define name="content-down">
+            <f:metadata>
+                <f:event type="preRenderView" listener="#{turnosBean.getClientesByArea(param.idArea)}" />
+            </f:metadata>
+
+            <div class="row" style="margin-top: 10px;">
+                <p:tabView id="allTabView" onTabShow="showTab(index)">
+                    <p:tab title="Turnos">
+
+                        <div class="row">
+                            <div class="col-sm-10 col-md-8">
+                                <div>
+                                    <h:outputLabel value="Turnos" />
+                                    <hr/>
+                                </div>
+
+                                <div>
+                                    <dl>
+                                        <dt>
+                                            <h:outputLabel value="Consecutivo Turno"/>
+                                        </dt>
+                                        <dd>
+                                            <h:outputText class="text-uppercase" value="#{turnosBean.turno.consecutivoTurno}"/>
+                                        </dd>                                            
+                                        <dt>
+                                            <h:outputLabel value="Identificacion Cliente"/>
+                                        </dt>
+                                        <dd>
+                                            <h:outputText class="text-uppercase" value="#{turnosBean.turno.identificacionCliente}"/>
+                                        </dd>
+                                        <dt>
+                                            <h:outputLabel value="Tipo Servicio"/>
+                                        </dt>
+                                        <dd>
+                                            <h:outputText class="text-uppercase" value="#{turnosBean.turno.tipoServicio}"/>
+                                        </dd>
+                                        <dt>
+                                            <h:outputLabel value="Estado"/>
+                                        </dt>
+                                        <dd>
+                                            <h:outputText class="text-uppercase" value="#{turnosBean.turno.estado}"/>
+                                        </dd>
+                                        
+                                        
+                                    </dl>
+                                </div>
+
+                            </div>
+                            
+
+                        </div>
+
+                    </p:tab>
+                     
+                </p:tabView>
+                
+            </div>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

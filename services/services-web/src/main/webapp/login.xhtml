@@ -1,0 +1,258 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content=""/>
+
+        <title></title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <!-- Font Awesome -->
+        <link href="font/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+
+        <!-- Custom CSS -->
+        <link href="css/estilos.css" rel="stylesheet"/>
+
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </h:head>
+
+    <h:body>
+        <!-- header -->
+        <div class="row cabeza">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="col-md-3 col-lg-3 col-sm-3"><img src="img/logo.png" alt="Logo Alcaldia Bogotá" width="165px" /></div>
+                <div class="col-md-6 col-lg-6 col-sm-6 titulo text-center">
+                    <p style="color: #fff;margin-bottom: 0px;"> SECRETARÍA DISTRITAL DE GOBIERNO </p>
+                    <small>Alcaldía Mayor de Bogotá D.C</small>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3 text-right">
+                    <p:inputText id="buscar-header" style="border-radius: 15px;border: 0px;" />
+                    <i class="fa fa-search" aria-hidden="true" style="color: #fff;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="contenido-nav">
+            <nav class="navbar navigation">
+                <center>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="login.xhtml" style="font-size: 13px;"><i class="fa fa-home" aria-hidden="true" style="color: #fff;"></i> Inicio</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav" style="font-size: 13px;">
+                            <li>
+                                <h:outputLink value="pages/reportes/home_reporte.xhtml">
+                                    <i class="fa fa-columns" aria-hidden="true" style="color: #fff;"></i> Consultas
+                                </h:outputLink>
+                            </li>
+                            <li><a href="pages/mapa/mapa.xhtml"><i class="fa fa-map" aria-hidden="true" style="color: #fff;"></i> Indicadores</a></li>
+                            <!--
+                            <li>
+                                <a href="#"><i class="fa fa-newspaper-o" aria-hidden="true" style="color: #fff;"></i> Opción Ciudadana</a>
+                            </li>
+                            -->
+                            <li><h:outputLink rendered="#{not autenticacionBean.logeado}" value="pages/usuario/crearCuenta.xhtml">
+                                    <i class="fa fa-user-circle-o" aria-hidden="true" style="color: #fff;"></i> Registro
+                                </h:outputLink>
+                            </li>
+                            <li><h:outputLink rendered="#{autenticacionBean.segUsuario.idRol.idRol eq 1}" value="pages/moderador/moderador.xhtml">
+                                    <i class="fa fa-user-secret" aria-hidden="true" style="color: #fff;"></i> Moderador
+                                </h:outputLink>
+                            </li>
+                            <li>
+                                <h:outputLink rendered="#{autenticacionBean.logeado}" onclick="cerrarSesion(); return false;">
+                                    Cerrar sesi&#243;n
+                                </h:outputLink>
+                                <h:form>
+                                    <p:remoteCommand name="cerrarSesion" action="#{autenticacionBean.cerrarSesion}" oncomplete="location.reload()" immediate="true"/>
+                                </h:form>
+                            </li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </center>
+            </nav>
+        </div>
+        <!-- fin header -->
+
+        <!-- contenido -->
+        <div class="contenido-index">
+            <div class="container">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <div class="col-md-8 col-lg-8 col-sm-8">
+                        <br></br>
+                        <!-- <img src="img/sipse-mapa.png" alt="Logo Sipse" width="70%" style="margin-top: 21%;margin-left: 10%;" /> -->
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4 formulario-login">
+                        <h:form rendered="#{not autenticacionBean.logeado}">
+                            <p:growl id="growl" showDetail="true"/>
+                            <img src="img/logo.png" class="pull-right" alt="Logo Alcaldia Bogotá" width="155px" />
+                            <br></br>
+                            <br></br>
+                            <p style="font-size: 65px;font-family: 'Gotham-Medium';margin-bottom: 0px;">SIPSE</p>
+                            <p>Sistema de Información para la programación, Seguimiento y Evaluación de la Gestión Institucional</p>
+                            <div class="form-group" style="margin-top: 30px;">
+                                <label for="usuario">Nombre de Usuario</label>
+                                <p:inputText styleClass="form-control" id="usuario" placeholder="Usuario" value="#{autenticacionBean.usuario}" required="true"
+                                             requiredMessage="El nombre de usuario es requerido" autocomplete="#{autenticacionBean.encendido}"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña</label>
+                                <p:password styleClass="form-control" id="contrasena"  placeholder="Contraseña" value="#{autenticacionBean.contrasena}" required="true"
+                                            requiredMessage="La contraseña es requerida" autocomplete="#{autenticacionBean.encendido}"/>
+                            </div>
+                            <div class="form-check">
+                                <p:selectBooleanCheckbox styleClass="form-check-input" id="recordar" value="#{autenticacionBean.recordar}" >
+                                    <p:ajax listener="#{autenticacionBean.permitirRecordar()}" process="@this" update="usuario, contrasena"/>
+                                </p:selectBooleanCheckbox>
+                                <i>Recordar Datos</i>
+                            </div>
+                            <div style="margin: 5px;">
+                                <p:messages showDetail="true"/>
+                                <!--p:captcha  label="Captcha"  requiredMessage="Validar el captcha es requerido" language="es" /-->
+                            </div>
+                            <center>
+                                <p:commandButton styleClass="btn btn-login" 
+                                                 id="btn-ingresar" 
+                                                 value="Ingresar"  update="growl"
+                                                 action="#{autenticacionBean.ingresar()}"/><br></br>
+
+
+                                <br></br>
+                                <p>
+                                    <p:commandButton styleClass="btn" 
+                                                     id="btn-crear-cuenta" immediate="true"
+                                                     value="Registrarse"  update="growl"
+                                                     action="#{cuentaBean.irCrearCuenta()}"/>
+                                </p>
+                            </center>
+                        </h:form>
+                    </div>
+                </div>
+            </div>   
+
+        </div>
+        <!-- fin contenido -->
+
+
+        <!-- footer -->
+        <div class="pie">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                            <p class="link-titulo">ALCALDÍA MAYOR DE BOGOTÁ</p>
+                            <hr style="margin-top: 0px; margin-bottom: 3px;"/>
+                            <li><a href="#" class="link-pie">Guía de Tramites y Servicios</a></li>
+                            <li><a href="#" class="link-pie">Sistema distrital de Quejas y Soluciones</a></li>
+                            <li><a href="#" class="link-pie">Portal Bogotá</a></li>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                            <p class="link-titulo">ENTIDADES DE CONTROL</p>
+                            <hr style="margin-top: 0px; margin-bottom: 3px;"/>
+                            <li><a href="#" class="link-pie">Procuraduría General de la Nación</a></li>
+                            <li><a href="#" class="link-pie">Contraloría General de la República</a></li>
+                            <li><a href="#" class="link-pie">Concejo de Bogotá</a></li>
+                            <li><a href="#" class="link-pie">Personería</a></li>
+                            <li><a href="#" class="link-pie">Veeduría Distrital</a></li>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                            <p class="link-titulo">VÍNCULOS DE INTERES</p>
+                            <hr style="margin-top: 0px; margin-bottom: 3px;"/>
+                            <li><a href="#" class="link-pie">Observatorio Ambiental de Bogotá</a></li>
+                            <li><a href="#" class="link-pie">Intranet</a></li>
+                            <li><a href="#" class="link-pie">Correo Institucional</a></li>
+                            <li><a href="#" class="link-pie">Portal Web Anterior</a></li>
+                            <li><a href="#" class="link-pie">Mapa del Sitio</a></li>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                            <p class="link-titulo">GOBIERNO EN LÍNEA</p>
+                            <hr style="margin-top: 0px; margin-bottom: 3px;"/>
+                            <li><a href="#" class="link-pie">Presidencia de la República</a></li>
+                            <li><a href="#" class="link-pie">MinTIC</a></li>
+                            <li><a href="#" class="link-pie">Gobierno en Línea</a></li>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="row pie-mitad">
+                <div class="container">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="col-md-9 col-lg-9 col-sm-9">
+                            <p>Dirección:  Edificio Líevano - Calle 11 No. 8-17<br></br>
+                                Teléfono:  (+57) 1 382 06 60, (+57) 1 338 70 00, (+57) 1 338 71 00 <br></br>    
+                                Fax:  (+57) 1 338 70 00 Ext: 6249<br></br>
+                                Correo electrónico:  atencion.ciudadania@gobiernobogota.gov.co<br></br>
+                                Notificaciones Judiciales:  notificacionesjudiciales@gobiernobogota.gov.co<br></br>
+                                Horario de Atención:  Lunes a Viernes de 7:00 a.m. a 4:30 p.m<br></br>
+                                Bogotá - Colombia</p>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                            <input type="" name=""></input>
+                            <br></br>
+                            <br></br>
+                            <img src="img/logo.png" alt="Logo Alcaldia Bogotá" width="155px" />
+                        </div>
+                    </div>
+                </div>            
+            </div>
+
+            <div class="row copy-pie">
+                <div class="container">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="col-md-9 col-lg-9 col-sm-9 text-right">
+                            <small>Términos y Condiciones &#160;&#160;&#160;&#160; Políticas de Uso &#160;&#160;&#160;&#160; Copyright © 2016 Govimentum</small>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+        <div class="row pie-final">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                <div class="col-md-9 col-lg-9 col-sm-9">
+                    <img src="img/logo.png" alt="Logo Alcaldia Bogotá" width="95px" />
+                    &#160;&#160;
+                    <a href="#" class="botonp">ALCALDÍA MAYOR DE BOGOTÁ</a>
+                    <a href="#" class="botonp">SERVICIO AL CIUDADANO</a>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3 text-right" style="padding-top: 7px;">
+                    <i class="fa fa-facebook" aria-hidden="true" style="color: #fff; font-size: 20px;"></i>
+                    <i class="fa fa-twitter" aria-hidden="true" style="color: #fff; font-size: 20px;"></i>
+                    <i class="fa fa-instagram" aria-hidden="true" style="color: #fff; font-size: 20px;"></i>
+                    <i class="fa fa-youtube-play" aria-hidden="true" style="color: #fff; font-size: 20px;"></i>
+                    <i class="fa fa-flickr" aria-hidden="true" style="color: #fff; font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+        <!-- fin footer -->
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+    </h:body>
+</html>
