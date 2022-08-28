@@ -1,0 +1,8 @@
+co\gov\scj\ejb\entity\scj\Estado.class
+co\gov\scj\ejb\facade\ClienteFacade.class
+co\gov\scj\ejb\facade\TurnosFacadeLocal.class
+co\gov\scj\ejb\entity\scj\TipoServicio.class
+co\gov\scj\ejb\facade\IClienteFacadeLocal.class
+co\gov\scj\ejb\facade\ITurnosFacadeLocal.class
+co\gov\scj\ejb\entity\scj\Turno.class
+co\gov\scj\ejb\entity\scj\Cliente.class
